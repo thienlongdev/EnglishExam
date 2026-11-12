@@ -56,6 +56,12 @@ management:
       show-details: never
 app:
   origin: ${APP_ORIGIN:http://localhost:3000}
+keycloak:
+  admin:
+    url: ${KEYCLOAK_ADMIN_URL:http://127.0.0.1:8280}
+    realm: ${KEYCLOAK_REALM:english-exam-demo}
+    username: ${KEYCLOAK_ADMIN_USERNAME:demo-owner}
+    password: ${KEYCLOAK_ADMIN_PASSWORD:${OIDC_ADMIN_PASSWORD:}}
 logging:
   level:
     root: INFO

@@ -19,7 +19,7 @@ public class SqlStore {
   },args);
  }
  public Map<String,Object> one(String sql,Object... args){var rows=list(sql,args);if(rows.isEmpty())throw ApiException.missing();return rows.getFirst();}
- public boolean exists(String sql,Object... args){return Boolean.TRUE.equals(jdbc.queryForObject(sql,Boolean.class,args));}
+ public boolean exists(String sql,Object... args){return !list(sql,args).isEmpty();}
  public int insertId(String sql,Object... args){return jdbc.queryForObject("SET NOCOUNT ON; "+sql,Integer.class,args);}
  public String now(){return (String)one("SELECT SYSUTCDATETIME() AS ServerNow").get("serverNow");}
 }

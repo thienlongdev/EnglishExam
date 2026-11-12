@@ -1,4 +1,4 @@
-$ErrorActionPreference='Stop'
+﻿$ErrorActionPreference='Stop'
 $root=(Resolve-Path "$PSScriptRoot/..").Path
 $local=Join-Path $root '.local/demo'
 $values=@{}
@@ -45,6 +45,7 @@ GRANT EXECUTE ON dbo.usp_PublishExam TO exam_demo;
 GRANT EXECUTE ON dbo.usp_StartExam TO exam_demo;
 GRANT EXECUTE ON dbo.usp_SaveAnswer TO exam_demo;
 GRANT EXECUTE ON dbo.usp_SubmitExam TO exam_demo;
+GRANT INSERT,UPDATE ON dbo.Users TO exam_demo;
 GRANT INSERT,UPDATE ON dbo.Classes TO exam_demo;
 GRANT INSERT,UPDATE ON dbo.Exams TO exam_demo;
 GRANT INSERT,UPDATE ON dbo.Questions TO exam_demo;

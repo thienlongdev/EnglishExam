@@ -1,6 +1,8 @@
 package vn.edu.englishexam.api;
 import java.sql.SQLException;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -9,6 +11,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 @RestControllerAdvice
 public class ErrorAdvice {
+ private static final Logger log = LoggerFactory.getLogger(ErrorAdvice.class);
  private static final Map<Integer,String> ERRORS=Map.ofEntries(
   Map.entry(51101,"Đề không tồn tại hoặc đã công bố."),Map.entry(51102,"Đề cần ít nhất 5 câu."),
   Map.entry(51103,"Mỗi câu cần 4 lựa chọn và đúng 1 đáp án."),Map.entry(51110,"Chưa lấy được khóa bắt đầu thi. Vui lòng thử lại."),
@@ -32,6 +35,7 @@ public class ErrorAdvice {
  @ExceptionHandler({MethodArgumentNotValidException.class,HttpMessageNotReadableException.class,HandlerMethodValidationException.class})
  ResponseEntity<?> validation(Exception e){return error(400,"VALIDATION","Thông tin chưa hợp lệ. Hãy kiểm tra các trường và giới hạn hiển thị.");}
  @ExceptionHandler(DataAccessException.class) ResponseEntity<?> sql(DataAccessException e){
+  log.error("DataAccessException caught: {}", e.getMessage(), e);
   for(Throwable t=e;t!=null;t=t.getCause())if(t instanceof SQLException s){
    for(SQLException q=s;q!=null;q=q.getNextException())if(ERRORS.containsKey(q.getErrorCode()))return error(409,"SQL_"+q.getErrorCode(),ERRORS.get(q.getErrorCode()));
    if(s.getErrorCode()==2601||s.getErrorCode()==2627)return error(409,"DUPLICATE","Mã hoặc quan hệ này đã tồn tại.");
@@ -39,5 +43,9 @@ public class ErrorAdvice {
    if(s.getErrorCode()==1205)return error(409,"RETRY","Thao tác đồng thời bị xung đột. Vui lòng tải lại và thử lại.");
   }
   return error(503,"DATABASE_UNAVAILABLE","Chưa kết nối được dữ liệu. Vui lòng đợi một lát rồi thử lại.");
+ }
+ @ExceptionHandler(Exception.class) ResponseEntity<?> unhandled(Exception e){
+  log.error("Unhandled exception caught: {}", e.getMessage(), e);
+  return error(500,"INTERNAL_ERROR","Đã xảy ra lỗi máy chủ không mong muốn: "+e.getMessage());
  }
 }

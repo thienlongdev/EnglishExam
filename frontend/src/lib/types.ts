@@ -1,4 +1,4 @@
-export type User={userId:number;email:string;fullName:string;isStudent:boolean;isTeacher:boolean};
+export type User={userId:number;email:string;fullName:string;isStudent:boolean;isTeacher:boolean;isAdmin?:boolean};
 export type ClassItem={classId:number;classCode:string;className:string;isActive:boolean;enrollmentActive?:boolean;teacherName?:string;examCount?:number;studentCount?:number;activeExamCount?:number};
 export type Exam={examId:number;examCode:string;title:string;durationMinutes:number;classId:number;classCode:string;className:string;opensAt:string;closesAt:string;maxAttempts:number;questionCount:number;totalPoints:number;attemptsUsed:number;resumeAttemptId:number|null;availability:"Open"|"Upcoming"|"Closed"|"Inactive"};
 export type Option={optionCode:string;optionText:string;isCorrect?:boolean};
@@ -11,3 +11,5 @@ export type Assignment={classId:number;classCode:string;className:string;opensAt
 export type ClassExam={examId:number;examCode:string;title:string;durationMinutes:number;status:string;opensAt:string;closesAt:string;maxAttempts:number;isActive:boolean;authorizedBy:number;authorizedByName:string;questionCount:number;totalPoints:number};
 export type Student={userId:number;email:string;fullName:string;isActive:boolean};
 export type TeacherResultRow={attemptId:number;attemptNo:number;startedAt:string;deadlineAt:string;status:"InProgress"|"Submitted";submittedAt:string|null;earnedPoints:number|null;maxPoints:number;scorePercent:number|null;examId:number;examCode:string;title:string;classId:number;classCode:string;className:string;studentId:number;email:string;fullName:string};
+export type AdminAccount={id:string;username:string;email:string;firstName?:string;lastName?:string;fullName:string;enabled:boolean;emailVerified:boolean;createdTimestamp:number;assignedRole:"admin"|"teacher"|"student"|"none";status:"pending"|"approved"|"disabled"|"rejected";sqlUserId:number|null;isTeacher:boolean;isStudent:boolean;sqlActive:boolean|null};
+export type AdminAccountsResponse={items:AdminAccount[];total:number;page:number;size:number;pendingCount:number;teacherCount:number;studentCount:number;disabledCount:number};

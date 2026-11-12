@@ -11,6 +11,7 @@ Copy-Item -LiteralPath "$root/backend/target/english-exam-api-1.0.0.jar" -Destin
 $env:DB_URL='jdbc:sqlserver://127.0.0.1:14339;databaseName=EnglishExamDB_Demo;encrypt=true;trustServerCertificate=true'
 $env:DB_USERNAME='exam_demo';$env:DB_PASSWORD=$secrets.dbPassword
 $env:OIDC_ISSUER=$state.issuer;$env:OIDC_CLIENT_ID='english-exam-demo';$env:OIDC_CLIENT_SECRET=$secrets.clientSecret
+$env:KEYCLOAK_ADMIN_URL='http://127.0.0.1:8280';$env:KEYCLOAK_REALM='english-exam-demo';$env:KEYCLOAK_ADMIN_USERNAME='demo-owner';$env:KEYCLOAK_ADMIN_PASSWORD=$secrets.adminPassword
 $env:APP_ORIGIN=$state.origin;$env:COOKIE_SECURE='true';$env:SERVER_ADDRESS='127.0.0.1';$env:PORT='8082'
 $argsList = @('"-Djava.net.preferIPv4Stack=true"', '"-Duser.timezone=UTC"', '-Xms128m', '-Xmx384m', '-jar', "`"$jar`"")
 $process=Start-Process -FilePath 'java' -ArgumentList $argsList -WorkingDirectory $root -WindowStyle Hidden -PassThru -RedirectStandardOutput "$demo/backend.log" -RedirectStandardError "$demo/backend-error.log"
