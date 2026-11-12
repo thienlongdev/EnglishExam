@@ -1,0 +1,83 @@
+{
+  "realm": "english-exam",
+  "enabled": true,
+  "displayName": "English Exam · Laptop Demo",
+  "loginTheme": "english-exam",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "resetPasswordAllowed": false,
+  "sslRequired": "none",
+  "bruteForceProtected": true,
+  "clients": [
+    {
+      "clientId": "english-exam-web",
+      "name": "English Exam Web Application",
+      "secret": "LaptopDemoSecret2026!",
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "redirectUris": [
+        "http://localhost:3000/login/oauth2/code/exam",
+        "http://127.0.0.1:3000/login/oauth2/code/exam",
+        "http://localhost:8081/login/oauth2/code/exam",
+        "http://127.0.0.1:8081/login/oauth2/code/exam"
+      ],
+      "webOrigins": [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "+"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:3000/##http://127.0.0.1:3000/"
+      }
+    }
+  ],
+  "users": [
+    {
+      "username": "teacher",
+      "email": "teacher@exam.local",
+      "emailVerified": true,
+      "enabled": true,
+      "firstName": "Minh",
+      "lastName": "Giảng viên",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "ExamDemo2026!",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "username": "student",
+      "email": "student@exam.local",
+      "emailVerified": true,
+      "enabled": true,
+      "firstName": "An",
+      "lastName": "Học viên",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "ExamDemo2026!",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "username": "outsider",
+      "email": "outsider@exam.local",
+      "emailVerified": true,
+      "enabled": true,
+      "firstName": "Bình",
+      "lastName": "Chưa ghi danh",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "ExamDemo2026!",
+          "temporary": false
+        }
+      ]
+    }
+  ]
+}

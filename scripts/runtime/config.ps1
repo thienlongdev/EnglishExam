@@ -1,0 +1,31 @@
+# Shared configuration for the EnglishExamWeb local production runtime.
+# Every path, port and identifier used by the runtime automation lives here.
+$script:Root              = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
+$script:DemoDir           = Join-Path $script:Root '.local\demo'
+$script:RuntimeDir        = Join-Path $script:Root '.local\runtime'
+$script:LogDir            = Join-Path $script:RuntimeDir 'logs'
+$script:StateFile         = Join-Path $script:RuntimeDir 'state.json'
+$script:RuntimeJson       = Join-Path $script:DemoDir 'runtime.json'
+$script:KeycloakEnvFile   = Join-Path $script:DemoDir 'keycloak.env'
+$script:SecretsFile       = Join-Path $script:DemoDir 'secrets.json'
+$script:GatewayScript     = Join-Path $script:Root 'scripts\demo-gateway.mjs'
+$script:BackendScript     = Join-Path $script:Root 'scripts\start-demo-backend.ps1'
+$script:ComposeFile       = Join-Path $script:Root 'compose.demo.yaml'
+$script:BackendJar        = Join-Path $script:DemoDir 'english-exam-demo-api.jar'
+$script:BackendSourceJar  = Join-Path $script:Root 'backend\target\english-exam-api-1.0.0.jar'
+$script:SqlContainer      = 'english-exam-web-sql'
+$script:IdentityContainer = 'english-exam-demo-identity'
+$script:BackendPort       = 8082
+$script:IdentityPort      = 8280
+$script:GatewayPort       = 8090
+$script:SqlPort           = 14339
+$script:PublicOrigin      = 'https://english-exam-coursework.vercel.app'
+$script:Database          = 'EnglishExamDB_Demo'
+$script:IdentityDatabase  = 'EnglishExamDB_DemoIdentity'
+$script:Realm             = 'english-exam-demo'
+$script:FunnelHttpsPort   = 443
+$script:VercelProjectId   = 'prj_gBzNA7EV8w2vOUrQ52vo3KyZYcTX'
+$script:VercelTeamId      = 'team_Bdtq8YBex6XVQPJciTcU5XwE'
+$script:DockerDesktopExe  = 'C:\Program Files\Docker\Docker\Docker Desktop.exe'
+$script:TailscaleExe      = Join-Path $env:ProgramFiles 'Tailscale\tailscale.exe'
+$script:Quiet             = $false

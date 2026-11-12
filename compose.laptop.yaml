@@ -1,0 +1,38 @@
+name: englishexam-laptop
+
+services:
+  sql:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: englishexam-laptop-sql
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+      MSSQL_SA_PASSWORD: "${LAPTOP_SQL_SA_PASSWORD:-Ee!LaptopDemoSaPass2026}"
+      MSSQL_MEMORY_LIMIT_MB: "2048"
+    ports:
+      - "127.0.0.1:${LAPTOP_SQL_PORT:-14333}:1433"
+    volumes:
+      - englishexam-laptop-sql-data:/var/opt/mssql
+    mem_limit: 2560m
+    restart: unless-stopped
+
+  identity:
+    image: quay.io/keycloak/keycloak:26.4
+    container_name: englishexam-laptop-identity
+    command: ["start-dev", "--import-realm"]
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: "owner"
+      KC_BOOTSTRAP_ADMIN_PASSWORD: "${LAPTOP_KC_ADMIN_PASSWORD:-Admin!LaptopDemo2026}"
+      JAVA_OPTS_KC_HEAP: "-Xms128m -Xmx384m"
+    ports:
+      - "127.0.0.1:${LAPTOP_KC_PORT:-8080}:8080"
+    volumes:
+      - englishexam-laptop-kc-data:/opt/keycloak/data
+      - ./config/keycloak/realm-export.json:/opt/keycloak/data/import/realm.json:ro
+      - ./identity-theme/english-exam:/opt/keycloak/themes/english-exam:ro
+    mem_limit: 768m
+    restart: unless-stopped
+
+volumes:
+  englishexam-laptop-sql-data:
+  englishexam-laptop-kc-data:

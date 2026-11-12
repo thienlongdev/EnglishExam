@@ -1,0 +1,57 @@
+# Environment & Secret Exclusions
+.env
+.env.*
+!.env.example
+!.env.production.example
+!.env.laptop.example
+
+# Local runtime directories & caches
+.local/
+.local-*/
+evidence/
+release/
+
+# Node.js & Next.js build outputs
+node_modules/
+.next/
+.next-*/
+.vercel/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Java & Maven build outputs
+target/
+.gradle/
+*.class
+*.jar
+*.war
+
+# Database files & backups
+*.bak
+*.mdf
+*.ldf
+*.sqlplan
+
+# Process IDs & Runtime logs
+*.log
+*.pid
+
+# Playwright & E2E Test reports
+test-results/
+playwright-report/
+blob-report/
+
+# OS and Editor configurations
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class

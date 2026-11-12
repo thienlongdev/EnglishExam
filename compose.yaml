@@ -1,0 +1,32 @@
+name: english-exam-web
+services:
+  sql:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: english-exam-web-sql
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Express
+      MSSQL_SA_PASSWORD: ${SQL_SA_PASSWORD}
+      MSSQL_MEMORY_LIMIT_MB: "2048"
+    ports: ["127.0.0.1:14339:1433"]
+    volumes: ["exam-sql:/var/opt/mssql"]
+    mem_limit: 3g
+    restart: unless-stopped
+  identity:
+    image: quay.io/keycloak/keycloak:26.4
+    container_name: english-exam-web-identity
+    command: ["start-dev", "--import-realm"]
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: owner
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${OIDC_ADMIN_PASSWORD}
+      JAVA_OPTS_KC_HEAP: "-Xms128m -Xmx384m"
+    ports: ["127.0.0.1:8180:8080"]
+    volumes:
+      - exam-identity:/opt/keycloak/data
+      - ./.local/realm.json:/opt/keycloak/data/import/realm.json:ro
+      - ./identity-theme/english-exam:/opt/keycloak/themes/english-exam:ro
+    mem_limit: 768m
+    restart: unless-stopped
+volumes:
+  exam-sql:
+  exam-identity:

@@ -1,0 +1,62 @@
+server:
+  port: ${PORT:8081}
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  forward-headers-strategy: none
+  servlet:
+    session:
+      timeout: 4h
+      cookie:
+        name: EXAMSESSION
+        http-only: true
+        secure: ${COOKIE_SECURE:false}
+        same-site: lax
+spring:
+  application:
+    name: english-exam-api
+  datasource:
+    url: ${DB_URL:jdbc:sqlserver://127.0.0.1:14339;databaseName=EnglishExamDB_WebDev;encrypt=true;trustServerCertificate=true}
+    username: ${DB_USERNAME:exam_web}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 6
+      minimum-idle: 0
+      connection-timeout: 10000
+  sql:
+    init:
+      mode: never
+  jpa:
+    hibernate:
+      ddl-auto: none
+    generate-ddl: false
+  jackson:
+    time-zone: UTC
+    deserialization:
+      fail-on-unknown-properties: true
+  security:
+    oauth2:
+      client:
+        registration:
+          exam:
+            provider: exam
+            client-id: ${OIDC_CLIENT_ID:english-exam-web}
+            client-secret: ${OIDC_CLIENT_SECRET}
+            scope: openid,profile,email
+            authorization-grant-type: authorization_code
+            redirect-uri: ${APP_ORIGIN:http://localhost:3000}/login/oauth2/code/exam
+        provider:
+          exam:
+            issuer-uri: ${OIDC_ISSUER:http://localhost:8180/realms/english-exam}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+app:
+  origin: ${APP_ORIGIN:http://localhost:3000}
+logging:
+  level:
+    root: INFO
+    org.springframework.security: WARN

@@ -1,0 +1,31 @@
+# Free web service only. Database and identity are external; no paid resources.
+services:
+  - type: web
+    name: english-exam-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
+    healthCheckPath: /actuator/health
+    numInstances: 1
+    autoDeployTrigger: 'off'
+    envVars:
+      - key: SERVER_ADDRESS
+        value: 0.0.0.0
+      - key: COOKIE_SECURE
+        value: 'true'
+      - key: APP_ORIGIN
+        sync: false
+      - key: DB_URL
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: OIDC_ISSUER
+        sync: false
+      - key: OIDC_CLIENT_ID
+        sync: false
+      - key: OIDC_CLIENT_SECRET
+        sync: false

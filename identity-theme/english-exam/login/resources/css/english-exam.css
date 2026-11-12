@@ -1,0 +1,21 @@
+@import url('../fonts/quicksand.css');
+:root{--pf-v5-global--FontFamily--text:'Quicksand Variable',sans-serif;--pf-v5-global--FontFamily--heading:'Quicksand Variable',sans-serif;--pf-v5-global--primary-color--100:#2357b7;--pf-v5-global--primary-color--200:#19438f;--pf-v5-global--Color--100:#182b4b}
+html,body,input,button,select,label,h1,h2,a,p,span{font-family:'Quicksand Variable',sans-serif!important}
+body{background:#f1f5fb!important;color:#182b4b;font-weight:500}
+.pf-v5-c-login{background:#f1f5fb;min-height:100dvh}
+.pf-v5-c-login__container{max-width:500px;margin:auto}
+.pf-v5-c-login__main{border:1px solid #dce4ef;border-radius:18px;box-shadow:0 20px 60px #173d7210;overflow:hidden}
+.pf-v5-c-login__main-header,.pf-v5-c-login__main-body,.pf-v5-c-login__main-footer{padding-left:36px;padding-right:36px}
+.pf-v5-c-login__main-header{padding-top:32px}
+.pf-v5-c-title{font-weight:700;letter-spacing:-.7px}
+.pf-v5-c-form__label{font-weight:650}
+.pf-v5-c-form-control{border-radius:8px;min-height:46px;background:#fff;border-color:#c8d7eb}
+.pf-v5-c-form-control input{font-size:16px}
+.pf-v5-c-button.pf-m-primary{background:#2357b7;border-radius:8px;min-height:46px;font-weight:700;transition:background .16s,transform .16s}
+.pf-v5-c-button.pf-m-primary:hover{background:#19438f}
+.pf-v5-c-button:active{transform:translateY(1px)}
+#kc-header,#kc-header-wrapper{color:#2357b7!important;font-size:22px;font-weight:700;letter-spacing:-.6px;text-align:center;text-transform:none}
+a{color:#2357b7}
+:focus-visible{outline:3px solid #8ab7f0;outline-offset:3px}
+@media(max-width:600px){.pf-v5-c-login__container{width:100%;padding:20px}.pf-v5-c-login__main-header,.pf-v5-c-login__main-body,.pf-v5-c-login__main-footer{padding-left:24px;padding-right:24px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}

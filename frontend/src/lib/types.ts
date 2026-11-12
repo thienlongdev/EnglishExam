@@ -1,0 +1,13 @@
+export type User={userId:number;email:string;fullName:string;isStudent:boolean;isTeacher:boolean};
+export type ClassItem={classId:number;classCode:string;className:string;isActive:boolean;enrollmentActive?:boolean;teacherName?:string;examCount?:number;studentCount?:number;activeExamCount?:number};
+export type Exam={examId:number;examCode:string;title:string;durationMinutes:number;classId:number;classCode:string;className:string;opensAt:string;closesAt:string;maxAttempts:number;questionCount:number;totalPoints:number;attemptsUsed:number;resumeAttemptId:number|null;availability:"Open"|"Upcoming"|"Closed"|"Inactive"};
+export type Option={optionCode:string;optionText:string;isCorrect?:boolean};
+export type Question={questionId:number;questionText:string;category:string;difficulty:string;questionOrder:number;points:number;selectedOptionCode:string|null;options:Option[];frozen?:boolean};
+export type Result={attemptId:number;title:string;classCode:string;attemptNo:number;earnedPoints:number;maxPoints:number;scorePercent:number;submittedAt:string};
+export type History=Result & {examId:number;classId:number;status:string;startedAt:string;deadlineAt:string};
+export type Attempt={attemptId:number;examId:number;classId:number;title:string;className:string;classCode:string;attemptNo:number;startedAt:string;deadlineAt:string;status:string;serverNow:string;questionCount:number;answeredCount:number;maxPoints:number;questions:Question[];result?:Result};
+export type TeacherExam={examId:number;examCode:string;title:string;status:string;durationMinutes:number;questionCount:number;totalPoints:number;attemptCount:number;submittedCount:number;averagePercent:number|null;questions:Question[];assignments:Assignment[]};
+export type Assignment={classId:number;classCode:string;className:string;opensAt:string;closesAt:string;maxAttempts:number;isActive:boolean;authorizedBy?:number;authorizedByName?:string};
+export type ClassExam={examId:number;examCode:string;title:string;durationMinutes:number;status:string;opensAt:string;closesAt:string;maxAttempts:number;isActive:boolean;authorizedBy:number;authorizedByName:string;questionCount:number;totalPoints:number};
+export type Student={userId:number;email:string;fullName:string;isActive:boolean};
+export type TeacherResultRow={attemptId:number;attemptNo:number;startedAt:string;deadlineAt:string;status:"InProgress"|"Submitted";submittedAt:string|null;earnedPoints:number|null;maxPoints:number;scorePercent:number|null;examId:number;examCode:string;title:string;classId:number;classCode:string;className:string;studentId:number;email:string;fullName:string};
